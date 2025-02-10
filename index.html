@@ -9,7 +9,7 @@
     <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue@3.2.37/dist/vue.global.prod.js"></script>
 </head>
-<body class="bg-gray-900 text-white flex items-center">
+<body class="bg-gray-900 text-white flex items-center justify-center min-h-screen">
     <div id="app" class="bg-gray-800 p-6 rounded-lg shadow-lg w-80">
         <h1 class="text-xl font-bold text-center mb-4">EV/Shutter Speed Calculator</h1>
         
@@ -28,14 +28,14 @@
         </div>
 
         <div class="mt-4">
-            <label for="aperture" class="block text-sm font-medium">Aperture (f-stop):</label>
+            <label for="aperture" class="block text-sm font-medium mb-2">Aperture (f-stop):</label>
             <select id="aperture" v-model.number="selectedAperture" @change="updateShutterSpeed" class="w-full bg-gray-700 text-white p-2 rounded">
                 <option v-for="aperture in apertures" :value="aperture">f/{{ aperture }}</option>
             </select>
         </div>
 
         <div class="mt-4 flex items-center">
-            <label for="shutter-speed" class="block text-sm font-medium flex-grow">Shutter Speed:</label>
+            <label for="shutter-speed" class="block text-sm font-medium flex-grow mb-2">Shutter Speed:</label>
             <span v-if="isOverOrUnderExposed" class="text-red-500 text-lg">⚠️</span>
         </div>
         <select id="shutter-speed" v-model.number="selectedShutterSpeed" @change="updateAperture" class="w-full bg-gray-700 text-white p-2 rounded">
