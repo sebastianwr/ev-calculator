@@ -99,16 +99,23 @@
                     this.selectedShutterSpeed = this.findClosestShutterSpeed(this.calculateShutterSpeed(this.selectedAperture));
                 },
                 updateAperture() {
-                    this.selectedAperture = this.calculateAperture(this.selectedShutterSpeed);
+                    this.selectedAperture = this.findClosestAperture(this.calculateAperture(this.selectedShutterSpeed));
                 },
                 calculateShutterSpeed(aperture) {
-                    return (Math.pow(aperture, 2) / Math.pow(2, this.selectedEV)) * (this.selectedISO / 100);
+                    var calcShutterSpeed = (Math.pow(aperture, 2) / Math.pow(2, this.selectedEV)) / (this.selectedISO / 100);
+                    console.log("Calculated shutter speed: " + calcShutterSpeed);
+                    return calcShutterSpeed;
                 },
                 calculateAperture(shutterSpeed) {
-                    return Math.sqrt((shutterSpeed * Math.pow(2, this.selectedEV)) / (this.selectedISO / 100));
+                    var calcA = Math.sqrt((shutterSpeed * Math.pow(2, this.selectedEV)) / (this.selectedISO / 100));
+                    console.log("Calculated aperture: " + calcA);
+                    return calcA;
                 },
                 findClosestShutterSpeed(value) {
                     return this.shutterSpeeds.reduce((prev, curr) => Math.abs(curr - value) < Math.abs(prev - value) ? curr : prev);
+                },
+                findClosestAperture(value) {
+                    return this.apertures.reduce((prev, curr) => Math.abs(curr - value) < Math.abs(prev - value) ? curr : prev);
                 },
                 formatShutterSpeed(value) {
                     return value >= 1 ? value + 's' : '1/' + Math.round(1 / value) + 's';
